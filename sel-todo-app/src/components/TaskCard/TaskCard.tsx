@@ -65,7 +65,7 @@ export default function TaskCard(props: TaskCardProps) {
         {!isDeleted
             ? <button onClick={handleDelete}>Delete</button>
             : <button onClick={handleUndoDelete}>Undo</button>}
-        <h2>{title}</h2>
+        <h2><a href={`/details/${id}`}>{title}</a></h2>
         <p>{description}</p>
     </div>
 }

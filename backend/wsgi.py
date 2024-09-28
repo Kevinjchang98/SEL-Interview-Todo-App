@@ -1,7 +1,8 @@
 import json
 
-from flask import Flask, request, jsonify
+from flask import Flask, request
 import psycopg2
+from psycopg2.extras import RealDictCursor
 
 app = Flask(__name__)
 
@@ -41,6 +42,26 @@ def get_task_overview():
 
     conn = get_database_connection()
     cur = conn.cursor()
+    cur.execute("SELECT id, title, description, isComplete FROM tasks WHERE id = %s;", (id,))
+    res = cur.fetchall()
+    cur.close()
+    conn.close()
+
+    return res
+
+
+@app.route("/get_task_details", methods=["POST"])
+def get_task_details():
+    # TODO: If an ID doesn't have a task should send an error back so front end can redirect
+    id = request.form.get("id")
+
+    if not id:
+        return json.dumps({"success": False,
+                           "error": f"Malformed request. Received: {request.form.get('id')}"}), 400, {
+            'ContentType': 'application/json'}
+
+    conn = get_database_connection()
+    cur = conn.cursor(cursor_factory=RealDictCursor)  # TODO Refactor other areas to return dict instead
     cur.execute("SELECT * FROM tasks WHERE id = %s;", (id,))
     res = cur.fetchall()
     cur.close()
