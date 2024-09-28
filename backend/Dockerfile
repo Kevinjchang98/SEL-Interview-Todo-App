@@ -11,9 +11,3 @@ COPY . /usr/src/app
 EXPOSE 4000
 
 CMD ["gunicorn", "--bind", "0.0.0.0:4000", "wsgi:app"]
-#
-#create table if not exists tasks (
-#  id              SERIAL,
-#  name            VARCHAR(100) NOT NULL,
-#  description     VARCHAR(1000)
-#);
