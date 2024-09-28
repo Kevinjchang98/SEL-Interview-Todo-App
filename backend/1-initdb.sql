@@ -6,5 +6,6 @@ CREATE TABLE IF NOT EXISTS tasks
 (
     id          serial PRIMARY KEY,
     title       varchar(100) NOT NULL,
-    description varchar(1000)
+    description varchar(1000),
+    isComplete  boolean
 );
