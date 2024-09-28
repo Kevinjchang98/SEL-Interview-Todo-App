@@ -91,6 +91,28 @@ def create_task():
     return json.dumps({'success': True}), 200, {'ContentType': 'application/json'}
 
 
+@app.route("/update_task", methods=["POST"])
+def update_task():
+    id = request.form.get("id")
+    title = request.form.get("title")
+    description = request.form.get("description")
+
+    if not title or not description:
+        return json.dumps({"success": False,
+                           "error": f"Malformed request. Received: {request.form.get('id')} {request.form.get('title')} {request.form.get('description')}"}), 400, {
+            'ContentType': 'application/json'}
+
+    conn = get_database_connection()
+    cur = conn.cursor()
+    cur.execute("UPDATE tasks SET title = %s, description = %s WHERE id = %s", (title, description, id))
+    conn.commit()
+    cur.close()
+    conn.close()
+
+    return json.dumps({'success': True}), 200, {'ContentType': 'application/json'}
+
+
+
 @app.route("/toggle_complete", methods=["POST"])
 def toggle_complete():
     id = request.form.get("id")
