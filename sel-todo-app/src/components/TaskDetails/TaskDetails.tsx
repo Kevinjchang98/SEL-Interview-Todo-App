@@ -19,7 +19,7 @@ export default function TaskDetails(props: { id: string }) {
             body: formData
         }).then((res) => res.json()).then((data) => {
             console.log(data[0])
-            const {id, title, description, iscomplete} = data[0]
+            const {_, title, description, __} = data[0]
             setTitle(title)
             setNewTitle(title)
             setDescription(description)
@@ -42,7 +42,7 @@ export default function TaskDetails(props: { id: string }) {
                 body: formData
             }).then((res) => res.json()).then((data) => {
                 console.log(data[0])
-                const {id, title, description, iscomplete} = data[0]
+                const {_, title, description, __} = data[0]
                 setTitle(title)
                 setNewTitle(title)
                 setDescription(description)

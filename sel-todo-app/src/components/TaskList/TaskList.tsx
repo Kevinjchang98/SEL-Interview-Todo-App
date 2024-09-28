@@ -6,9 +6,9 @@ async function fetchTaskList() {
 }
 
 export default async function TaskList() {
-    let tasksList: Array<TaskArrayTypes> = await fetchTaskList()
+    const tasksList: Array<TaskArrayTypes> = await fetchTaskList()
 
     return <div>
-        {tasksList.map(task => <TaskCard task={task} />)}
+        {tasksList.map(task => <TaskCard task={task} key={task[0]} />)}
     </div>
 }

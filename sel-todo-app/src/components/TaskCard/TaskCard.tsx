@@ -30,11 +30,11 @@ export default function TaskCard(props: TaskCardProps) {
         return data[0]?.[3]
     }
 
-    async function handleCheckboxChange(event: ChangeEvent<HTMLInputElement>) {
+    async function handleCheckboxChange() {
         const formData = new FormData();
         formData.append("id", id.toString())
 
-        const res = await fetch("http://127.0.0.1:4000/toggle_complete", {
+        await fetch("http://127.0.0.1:4000/toggle_complete", {
             method: "POST",
             body: formData
         })
@@ -46,7 +46,7 @@ export default function TaskCard(props: TaskCardProps) {
         const formData = new FormData();
         formData.append("id", id.toString())
 
-        const res = await fetch("http://127.0.0.1:4000/delete_task", {
+        await fetch("http://127.0.0.1:4000/delete_task", {
             method: "POST",
             body: formData
         })
