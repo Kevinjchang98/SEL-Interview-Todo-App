@@ -1,4 +1,3 @@
-import Image from "next/image";
 import styles from "./page.module.css";
 import TaskList from "@/components/TaskList/TaskList";
 import ActionMenu from "@/components/ActionMenu/ActionMenu";

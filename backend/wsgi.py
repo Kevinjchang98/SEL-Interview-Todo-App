@@ -53,6 +53,7 @@ def get_task_overview():
 def create_task():
     title = request.form.get("title")
     description = request.form.get("description")
+    isComplete = request.form.get("isComplete")
 
     if not title or not description:
         return json.dumps({"success": False,
@@ -61,7 +62,7 @@ def create_task():
 
     conn = get_database_connection()
     cur = conn.cursor()
-    cur.execute("INSERT INTO tasks VALUES(DEFAULT, %s, %s, false);", (title, description))
+    cur.execute("INSERT INTO tasks VALUES(DEFAULT, %s, %s, %s);", (title, description, isComplete))
     conn.commit()
     cur.close()
     conn.close()

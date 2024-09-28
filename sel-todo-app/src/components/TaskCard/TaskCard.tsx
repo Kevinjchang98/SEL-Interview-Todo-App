@@ -1,6 +1,9 @@
 'use client';
 
+import styles from "./TaskCard.module.css"
+
 import {ChangeEvent, useState} from "react";
+import {createTask} from "@/components/ActionMenu/ActionMenu";
 
 interface TaskCardProps {
     task: TaskArrayTypes
@@ -12,6 +15,7 @@ export type TaskArrayTypes = [number, string, string, boolean]
 export default function TaskCard(props: TaskCardProps) {
     const [id, title, description, isComplete] = props.task
     const [isChecked, setChecked] = useState(isComplete)
+    const [isDeleted, setDeleted] = useState(false)
 
     async function refreshCurrentTaskIsComplete() {
         const formData = new FormData();
@@ -23,12 +27,10 @@ export default function TaskCard(props: TaskCardProps) {
         })
         const data = await res.json()
 
-        return data[0][3]
+        return data[0]?.[3]
     }
 
     async function handleCheckboxChange(event: ChangeEvent<HTMLInputElement>) {
-        event.preventDefault()
-
         const formData = new FormData();
         formData.append("id", id.toString())
 
@@ -40,8 +42,29 @@ export default function TaskCard(props: TaskCardProps) {
         setChecked(await refreshCurrentTaskIsComplete())
     }
 
-    return <div>
-        <input type="checkbox" checked={isChecked} onChange={handleCheckboxChange}/>
+    async function handleDelete() {
+        const formData = new FormData();
+        formData.append("id", id.toString())
+
+        const res = await fetch("http://127.0.0.1:4000/delete_task", {
+            method: "POST",
+            body: formData
+        })
+
+        setDeleted(true)
+    }
+
+    async function handleUndoDelete() {
+        await createTask(title, description, isChecked)
+
+        setDeleted(false)
+    }
+
+    return <div className={isDeleted ? styles.deleted : ""}>
+        <input type="checkbox" disabled={isDeleted} checked={isChecked} onChange={handleCheckboxChange}/>
+        {!isDeleted
+            ? <button onClick={handleDelete}>Delete</button>
+            : <button onClick={handleUndoDelete}>Undo</button>}
         <h2>{title}</h2>
         <p>{description}</p>
     </div>
