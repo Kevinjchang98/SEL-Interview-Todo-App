@@ -13,7 +13,7 @@ export default function TaskCard(props: TaskCardProps) {
     const [id, title, description, isComplete] = props.task
     const [isChecked, setChecked] = useState(isComplete)
 
-    async function refreshCurrentTaskState() {
+    async function refreshCurrentTaskIsComplete() {
         const formData = new FormData();
         formData.append("id", id.toString())
 
@@ -37,7 +37,7 @@ export default function TaskCard(props: TaskCardProps) {
             body: formData
         })
 
-        setChecked(await refreshCurrentTaskState())
+        setChecked(await refreshCurrentTaskIsComplete())
     }
 
     return <div>
