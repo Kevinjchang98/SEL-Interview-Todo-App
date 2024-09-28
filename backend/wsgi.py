@@ -36,7 +36,7 @@ def create_task():
     description = request.form.get("description")
 
     if not title or not description:
-        return jsonify(success=False)
+        return json.dumps({"success": False, "error": f"Malformed request. Received: {request.form.get('title')} {request.form.get('description')}"}), 400, {'ContentType': 'application/json'}
 
     conn = get_database_connection()
     cur = conn.cursor()
