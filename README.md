@@ -29,3 +29,5 @@ if this were to be an actual production todo app
    frontend to backend connections are very apparent
 5. More robust DevOps items. Currently the Docker and deploy scripts were made for my own convenience in prototyping,
    but should be made more generalizable for an actual production system
+6. Define repo linting, formatting rules for frontend and backend
+7. Implement CI/CD pipelines
