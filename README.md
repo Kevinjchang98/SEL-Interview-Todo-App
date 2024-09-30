@@ -1,5 +1,9 @@
 # SEL Interview Todo App
 
+Currently hosted at [http://34.168.81.5/]
+
+Note that due to DNS propagation delays I wasn't able to get it hosted onto a domain name yet, and thus can't easily get an SSL cert for https. Due to that, Firefox seems to block some http requests to the backend, so currently Chrome's recommended for http communication to work until I can get a domain and https up for the backend.
+
 ## Features/functionalities implemented
 
 1. Viewing tasks in a list
