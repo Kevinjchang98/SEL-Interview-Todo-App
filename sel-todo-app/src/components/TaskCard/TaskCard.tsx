@@ -2,7 +2,7 @@
 
 import styles from "./TaskCard.module.css"
 
-import {ChangeEvent, useState} from "react";
+import {useState} from "react";
 import {createTask} from "@/components/ActionMenu/ActionMenu";
 
 interface TaskCardProps {
