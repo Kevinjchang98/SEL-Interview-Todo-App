@@ -1,31 +1,30 @@
 .new_task_button {
-    height: 40px;
-    line-height: 40px;
-    width: 40px;
-    font-size: 2em;
-    font-weight: bold;
-    border-radius: 50%;
-    background-color: var(--nord14);
-    border: none;
-    color: var(--nord1);
-    text-align: center;
-    cursor: pointer;
+  height: 40px;
+  line-height: 40px;
+  width: 40px;
+  font-size: 2em;
+  font-weight: bold;
+  border-radius: 50%;
+  background-color: var(--nord14);
+  border: none;
+  color: var(--nord1);
+  text-align: center;
+  cursor: pointer;
 }
 
 .new_task_button:hover {
-    transition: all .2s ease-in;
-    background-color: var(--nord14);
-    border: none;
-    color: var(--nord4);
+  transition: all 0.2s ease-in;
+  background-color: var(--nord14);
+  border: none;
+  color: var(--nord4);
 }
 
 .create_task_form {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 .create_task_form label {
-    margin-top: 10px;
-    color: var(--nord14);
+  margin-top: 10px;
+  color: var(--nord14);
 }
-

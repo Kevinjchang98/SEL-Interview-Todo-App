@@ -1,37 +1,37 @@
 .details_container {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 .title_edit_container {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
 }
 
 .title_edit_container h1 {
-    width: calc(100% - 100px);
-    height: 40px;
-    border-bottom: solid 2px var(--nord10);
+  width: calc(100% - 100px);
+  height: 40px;
+  border-bottom: solid 2px var(--nord10);
 }
 
 .title_edit_container button {
-    margin-left: 10px;
-    width: 100px;
-    height: 40px;
+  margin-left: 10px;
+  width: 100px;
+  height: 40px;
 }
 
-.details_container input[type=text] {
-    font-size: 1.8em;
-    height: 40px;
-    margin-top: 0;
-    margin-bottom: 0;
+.details_container input[type="text"] {
+  font-size: 1.8em;
+  height: 40px;
+  margin-top: 0;
+  margin-bottom: 0;
 }
 
 .details_container textarea {
-    height: 15em;
+  height: 15em;
 }
 
 .details_container p {
-    padding-top: 20px;
+  padding-top: 20px;
 }
