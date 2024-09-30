@@ -33,6 +33,8 @@
   gap: 32px;
   grid-row-start: 2;
   min-width: 500px;
+  width: 60dvw;
+  max-width: 800px;
 }
 
 .main ol {
