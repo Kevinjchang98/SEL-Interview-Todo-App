@@ -7,5 +7,6 @@ cp ./nginx-config /etc/nginx/sites-available/default
 
 service nginx restart
 
+# This should be a service and not just running in the current shell
 docker-compose build
 docker-compose up
