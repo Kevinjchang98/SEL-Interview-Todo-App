@@ -3,6 +3,11 @@
 import { ChangeEvent, useEffect, useState } from "react";
 import styles from "./TaskDetails.module.css";
 
+/**
+ * Component to display details about a task. Also allows users to edit the title or description of the task
+ * @param props
+ * @constructor
+ */
 export default function TaskDetails(props: { id: string }) {
   const [isEditing, setIsEditing] = useState(false);
   const [title, setTitle] = useState("");

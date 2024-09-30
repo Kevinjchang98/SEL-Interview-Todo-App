@@ -3,6 +3,12 @@
 import { ChangeEvent, useState } from "react";
 import styles from "./ActionMenu.module.css";
 
+/**
+ * API call to backend for creating a new task
+ * @param title Title of the task
+ * @param description Description of the task
+ * @param isComplete Bool for if the task is complete or not
+ */
 export async function createTask(
   title: string,
   description: string,
@@ -14,14 +20,16 @@ export async function createTask(
   formData.append("isComplete", isComplete ? "true" : "false");
   formData.append("creationDate", new Date().toISOString());
 
-  const res = await fetch(`${process.env.NEXT_PUBLIC_DB_HOST}/create_task`, {
+  await fetch(`${process.env.NEXT_PUBLIC_DB_HOST}/create_task`, {
     method: "POST",
     body: formData,
   });
-
-  const data = res.json();
 }
 
+/**
+ * Menu of actions users may perform on task list
+ * @constructor
+ */
 export default function ActionMenu() {
   const [showCreateForm, setShowCreateForm] = useState(false);
   const [newTaskData, setNewTaskData] = useState({
@@ -35,6 +43,7 @@ export default function ActionMenu() {
     setNewTaskData({ ...newTaskData, [event.target.name]: event.target.value });
   };
 
+  // Form for creating a new task
   const createForm = (
     <form
       className={styles.create_task_form}

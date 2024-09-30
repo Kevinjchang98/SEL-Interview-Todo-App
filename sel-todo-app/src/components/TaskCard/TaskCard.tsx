@@ -12,6 +12,11 @@ interface TaskCardProps {
 // id, title, description, isComplete
 export type TaskArrayTypes = [number, string, string, boolean];
 
+/**
+ * Component to display a particular task's basic info as a brief overview
+ * @param props
+ * @constructor
+ */
 export default function TaskCard(props: TaskCardProps) {
   const [id, title, description, isComplete] = props.task;
   const [isChecked, setChecked] = useState(isComplete);
