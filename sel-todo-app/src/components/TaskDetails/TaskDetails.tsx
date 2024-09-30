@@ -1,6 +1,7 @@
 'use client';
 
 import {ChangeEvent, useEffect, useState} from "react";
+import styles from "./TaskDetails.module.css"
 
 export default function TaskDetails(props: { id: string }) {
     const [isEditing, setIsEditing] = useState(false);
@@ -68,8 +69,8 @@ export default function TaskDetails(props: { id: string }) {
         }
     }
 
-    return <div>
-        <div>
+    return title === "" ? <></> : <div className={styles.details_container}>
+        <div className={styles.title_edit_container}>
             {/* Title text box if editing*/}
             {!isEditing ?
                 <h1>{title}</h1> :

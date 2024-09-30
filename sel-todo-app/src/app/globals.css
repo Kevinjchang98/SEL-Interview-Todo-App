@@ -40,3 +40,20 @@ a {
     color-scheme: dark;
   }
 }
+
+input[type=text], textarea {
+  outline: none;
+  width: 100%;
+  padding: 10px 20px;
+  margin: 8px 0;
+  background: var(--nord3);
+  border: none;
+  border-bottom: solid 2px var(--nord3);
+  border-radius: 4px;
+  color: var(--nord4);
+}
+
+input[type=text]:focus, textarea:focus {
+  outline: none;
+  border-bottom: solid 2px var(--nord14);
+}

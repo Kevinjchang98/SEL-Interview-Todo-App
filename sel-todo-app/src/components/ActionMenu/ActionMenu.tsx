@@ -1,6 +1,7 @@
 'use client';
 
 import {ChangeEvent, useState} from "react";
+import styles from './ActionMenu.module.css';
 
 export async function createTask(title: string, description: string, isComplete: boolean = false) {
     const formData = new FormData();
@@ -26,7 +27,7 @@ export default function ActionMenu() {
         setNewTaskData({...newTaskData, [event.target.name]: event.target.value})
     }
 
-    const createForm = <form onSubmit={() => {
+    const createForm = <form className={styles.create_task_form} onSubmit={() => {
         createTask(newTaskData.title, newTaskData.description)
     }}>
         <label htmlFor="title">Title</label>
@@ -37,9 +38,9 @@ export default function ActionMenu() {
     </form>
 
     return <div>
-        <button onClick={() => {
+        <button className={styles.new_task_button} onClick={() => {
             setShowCreateForm(!showCreateForm)
-        }}>New task
+        }}>+
         </button>
         {showCreateForm ? createForm : null}
     </div>

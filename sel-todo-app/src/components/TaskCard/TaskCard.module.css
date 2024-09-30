@@ -1,6 +1,6 @@
 .deleted {
     text-decoration: line-through;
-    color: gray;
+    color: var(--nord3);
 }
 
 .description {
@@ -23,6 +23,10 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+}
+
+.title_container h2:hover {
+    color: var(--nord10)
 }
 
 .title_container button {
