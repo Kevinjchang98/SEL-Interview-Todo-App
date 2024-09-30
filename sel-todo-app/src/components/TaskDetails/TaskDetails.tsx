@@ -74,7 +74,7 @@ export default function TaskDetails(props: { id: string }) {
             {/* Title text box if editing*/}
             {!isEditing ?
                 <h1>{title}</h1> :
-                <input type="text" name="title" defaultValue={newTitle} onChange={handleEditTitle}/>
+                <input type="text" name="title" defaultValue={newTitle} onChange={handleEditTitle} required/>
             }
 
             {/* Edit and Save/cancel buttons*/}
@@ -99,7 +99,7 @@ export default function TaskDetails(props: { id: string }) {
 
         {/* Description text box if editing*/}
         {isEditing
-            ? <textarea name="description" defaultValue={newDescription} onChange={handleEditDescription}/> :
+            ? <textarea name="description" defaultValue={newDescription} onChange={handleEditDescription} required/> :
             <p>{description}</p>}
     </div>
 }

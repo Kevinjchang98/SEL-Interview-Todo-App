@@ -31,9 +31,9 @@ export default function ActionMenu() {
         createTask(newTaskData.title, newTaskData.description)
     }}>
         <label htmlFor="title">Title</label>
-        <input type="text" name="title" value={newTaskData.title} onChange={handleFormInputChange}/>
+        <input type="text" name="title" value={newTaskData.title} onChange={handleFormInputChange} required/>
         <label htmlFor="description">Description</label>
-        <textarea name="description" value={newTaskData.description} onChange={handleFormInputChange}/>
+        <textarea name="description" value={newTaskData.description} onChange={handleFormInputChange} required/>
         <button type="submit">Add</button>
     </form>
 
