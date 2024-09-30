@@ -21,7 +21,7 @@ export default function TaskCard(props: TaskCardProps) {
         const formData = new FormData();
         formData.append("id", id.toString())
 
-        const res = await fetch("http://34.168.254.242/get_task_overview", {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_DB_HOST}/get_task_overview`, {
             method: "POST",
             body: formData
         })
@@ -34,7 +34,7 @@ export default function TaskCard(props: TaskCardProps) {
         const formData = new FormData();
         formData.append("id", id.toString())
 
-        await fetch("http://34.168.254.242/toggle_complete", {
+        await fetch(`${process.env.NEXT_PUBLIC_DB_HOST}/toggle_complete`, {
             method: "POST",
             body: formData
         })
@@ -46,7 +46,7 @@ export default function TaskCard(props: TaskCardProps) {
         const formData = new FormData();
         formData.append("id", id.toString())
 
-        await fetch("http://34.168.254.242/delete_task", {
+        await fetch(`${process.env.NEXT_PUBLIC_DB_HOST}/delete_task`, {
             method: "POST",
             body: formData
         })
@@ -62,7 +62,7 @@ export default function TaskCard(props: TaskCardProps) {
 
     return <div className={isDeleted ? styles.deleted : ""}>
         <div className={styles.title_container}>
-            <input type="checkbox" disabled={isDeleted} checked={isChecked} onClick={handleCheckboxChange}/>
+            <input type="checkbox" disabled={isDeleted} checked={isChecked} onChange={handleCheckboxChange}/>
             <h2><a href={`/details/${id}`}>{title}</a></h2>
             {!isDeleted
                 ? <button onClick={handleDelete}>Delete</button>

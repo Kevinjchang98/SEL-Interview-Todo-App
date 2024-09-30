@@ -14,7 +14,7 @@ export default function TaskDetails(props: { id: string }) {
         const formData = new FormData()
         formData.append("id", props.id)
 
-        fetch("http://34.168.254.242/get_task_details", {
+        fetch(`${process.env.NEXT_PUBLIC_DB_HOST}/get_task_details`, {
             method: "POST",
             body: formData
         }).then((res) => res.json()).then((data) => {
@@ -33,11 +33,11 @@ export default function TaskDetails(props: { id: string }) {
         formData.append("title", newTitle)
         formData.append("description", newDescription)
 
-        fetch("http://34.168.254.242/update_task", {
+        fetch(`${process.env.NEXT_PUBLIC_DB_HOST}/update_task`, {
             method: "POST",
             body: formData
         }).then(() => {
-            fetch("http://34.168.254.242/get_task_details", {
+            fetch(`${process.env.NEXT_PUBLIC_DB_HOST}/get_task_details`, {
                 method: "POST",
                 body: formData
             }).then((res) => res.json()).then((data) => {

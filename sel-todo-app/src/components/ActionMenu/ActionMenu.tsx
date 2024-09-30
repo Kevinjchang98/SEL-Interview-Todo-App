@@ -9,7 +9,7 @@ export async function createTask(title: string, description: string, isComplete:
     formData.append("isComplete", isComplete ? "true" : "false");
     formData.append("creationDate", new Date().toISOString());
 
-    const res = await fetch("http://34.168.254.242/create_task", {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_DB_HOST}/create_task`, {
         method: "POST",
         body: formData
     });

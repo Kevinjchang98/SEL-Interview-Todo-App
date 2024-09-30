@@ -1,7 +1,7 @@
 import TaskCard, {TaskArrayTypes} from "@/components/TaskCard/TaskCard";
 
 async function fetchTaskList() {
-    const res = await fetch("http://34.168.254.242/")
+    const res = await fetch(`${process.env.NEXT_PUBLIC_DB_HOST}/`)
     return res.json()
 }
 
