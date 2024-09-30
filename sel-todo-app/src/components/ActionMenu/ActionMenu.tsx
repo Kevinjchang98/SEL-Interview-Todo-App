@@ -15,7 +15,6 @@ export async function createTask(title: string, description: string, isComplete:
     });
 
     const data = res.json()
-    console.log(data)
 }
 
 export default function ActionMenu() {
