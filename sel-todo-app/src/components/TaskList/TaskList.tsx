@@ -1,7 +1,7 @@
 import TaskCard, {TaskArrayTypes} from "@/components/TaskCard/TaskCard";
 
 async function fetchTaskList() {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_DB_HOST}/`)
+    const res = await fetch(`${process.env.NEXT_PUBLIC_DB_HOST}/`, { cache: "no-store" });
     return res.json()
 }
 
