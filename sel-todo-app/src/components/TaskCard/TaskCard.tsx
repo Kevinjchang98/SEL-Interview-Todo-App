@@ -21,7 +21,7 @@ export default function TaskCard(props: TaskCardProps) {
         const formData = new FormData();
         formData.append("id", id.toString())
 
-        const res = await fetch("http://127.0.0.1:4000/get_task_overview", {
+        const res = await fetch("http://34.168.254.242/get_task_overview", {
             method: "POST",
             body: formData
         })
@@ -34,7 +34,7 @@ export default function TaskCard(props: TaskCardProps) {
         const formData = new FormData();
         formData.append("id", id.toString())
 
-        await fetch("http://127.0.0.1:4000/toggle_complete", {
+        await fetch("http://34.168.254.242/toggle_complete", {
             method: "POST",
             body: formData
         })
@@ -46,7 +46,7 @@ export default function TaskCard(props: TaskCardProps) {
         const formData = new FormData();
         formData.append("id", id.toString())
 
-        await fetch("http://127.0.0.1:4000/delete_task", {
+        await fetch("http://34.168.254.242/delete_task", {
             method: "POST",
             body: formData
         })
@@ -61,11 +61,13 @@ export default function TaskCard(props: TaskCardProps) {
     }
 
     return <div className={isDeleted ? styles.deleted : ""}>
-        <input type="checkbox" disabled={isDeleted} checked={isChecked} onChange={handleCheckboxChange}/>
-        {!isDeleted
-            ? <button onClick={handleDelete}>Delete</button>
-            : <button onClick={handleUndoDelete}>Undo</button>}
-        <h2><a href={`/details/${id}`}>{title}</a></h2>
-        <p>{description}</p>
+        <div className={styles.title_container}>
+            <input type="checkbox" disabled={isDeleted} checked={isChecked} onClick={handleCheckboxChange}/>
+            <h2><a href={`/details/${id}`}>{title}</a></h2>
+            {!isDeleted
+                ? <button onClick={handleDelete}>Delete</button>
+                : <button onClick={handleUndoDelete}>Undo</button>}
+        </div>
+        <p className={styles.description}>{description}</p>
     </div>
 }

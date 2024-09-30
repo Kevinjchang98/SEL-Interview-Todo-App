@@ -1,7 +1,7 @@
 import TaskCard, {TaskArrayTypes} from "@/components/TaskCard/TaskCard";
 
 async function fetchTaskList() {
-    const res = await fetch("http://127.0.0.1:4000/")
+    const res = await fetch("http://34.168.254.242/")
     return res.json()
 }
 
