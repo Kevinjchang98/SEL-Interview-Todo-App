@@ -4,7 +4,13 @@ Currently hosted at http://34.168.81.5/
 
 Note that due to DNS propagation delays I wasn't able to get it hosted onto a domain name yet, and thus can't easily get
 an SSL cert for https. Google Chrome was the browser primarily used in development, most tested, and recommended to view
-this app
+this app.
+
+Please also ignore the integrated Deployments on this GitHub repo. I initially used Vercel to deploy the frontend, but 
+realized it would run into https issues due to the backend not being available with https.
+
+There are other READMEs specific to the frontend or backend in the respective directories with more details about
+running the frontend and backend servers locally.
 
 Thanks for your time!
 
