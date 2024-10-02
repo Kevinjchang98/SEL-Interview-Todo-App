@@ -19,6 +19,9 @@ jobs:
       - name: Install Playwright Browsers
         working-directory: ./sel-todo-app
         run: npx playwright install --with-deps
+      - name: Build production
+        working-directory: ./sel-todo-app
+        run: npm run build
       - name: Run Playwright tests
         working-directory: ./sel-todo-app
         run: npx playwright test
