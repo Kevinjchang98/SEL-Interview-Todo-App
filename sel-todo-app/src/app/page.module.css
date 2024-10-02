@@ -19,7 +19,6 @@
   flex-direction: column;
   gap: 32px;
   grid-row-start: 2;
-  min-width: 500px;
   width: 60dvw;
   max-width: 800px;
   min-height: calc(100dvh - 260px);
@@ -113,11 +112,13 @@ a.secondary {
 
 @media (max-width: 600px) {
   .page {
+    min-width: 200px;
     padding: 32px;
     padding-bottom: 80px;
   }
 
   .main {
+    width: 80dvw;
     align-items: center;
   }
 
@@ -143,11 +144,5 @@ a.secondary {
     flex-wrap: wrap;
     align-items: center;
     justify-content: center;
-  }
-}
-
-@media (prefers-color-scheme: dark) {
-  .logo {
-    filter: invert();
   }
 }

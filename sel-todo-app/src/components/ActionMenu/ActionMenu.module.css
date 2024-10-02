@@ -1,3 +1,7 @@
+.action_menu_container {
+  width: 100%;
+}
+
 .new_task_button {
   height: 40px;
   line-height: 40px;

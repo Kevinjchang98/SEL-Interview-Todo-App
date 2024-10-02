@@ -82,7 +82,7 @@ export default function ActionMenu({
   );
 
   return (
-    <div>
+    <div className={styles.action_menu_container}>
       <button
         className={styles.new_task_button}
         onClick={() => {
