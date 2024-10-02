@@ -94,9 +94,10 @@ def create_task():
             'ContentType': 'application/json'}
 
     with get_database_cursor(commit=True, cursor_factory=RealDictCursor) as cur:
-        cur.execute("INSERT INTO tasks VALUES(DEFAULT, %s, %s, %s);", (title, description, isComplete))
+        cur.execute("INSERT INTO tasks VALUES(DEFAULT, %s, %s, %s) RETURNING id;", (title, description, isComplete))
+        id = cur.fetchall()[0]["id"]
 
-    return json.dumps({'success': True}), 200, {'ContentType': 'application/json'}
+    return json.dumps({'success': True, 'id': id}), 200, {'ContentType': 'application/json'}
 
 
 @app.route("/update_task", methods=["POST"])

@@ -18,7 +18,8 @@ export type TaskArrayTypes = [number, string, string, boolean];
  * @constructor
  */
 export default function TaskCard(props: TaskCardProps) {
-  const [id, title, description, isComplete] = props.task;
+  const [initial_id, title, description, isComplete] = props.task;
+  const [id, setId] = useState<number>(initial_id);
   const [isChecked, setChecked] = useState(isComplete);
   const [isDeleted, setDeleted] = useState(false);
 
@@ -64,9 +65,12 @@ export default function TaskCard(props: TaskCardProps) {
 
   async function handleUndoDelete() {
     // Note this creates the same task contents but different ID in the backend
-    await createTask(title, description, isChecked);
+    const id = await createTask(title, description, isChecked);
 
-    setDeleted(false);
+    if (id) {
+      setId(id);
+      setDeleted(false);
+    }
   }
 
   return (
@@ -79,7 +83,7 @@ export default function TaskCard(props: TaskCardProps) {
           onChange={handleCheckboxChange}
         />
         <h2>
-          <a href={`/details/${id}`}>{title}</a>
+          <a href={isDeleted ? "#" : `/details/${id}`}>{title}</a>
         </h2>
         {!isDeleted ? (
           <button onClick={handleDelete}>Delete</button>

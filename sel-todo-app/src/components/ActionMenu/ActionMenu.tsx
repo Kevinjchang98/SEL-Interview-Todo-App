@@ -20,10 +20,14 @@ export async function createTask(
   formData.append("isComplete", isComplete ? "true" : "false");
   formData.append("creationDate", new Date().toISOString());
 
-  await fetch(`${process.env.NEXT_PUBLIC_DB_HOST}/create_task`, {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_DB_HOST}/create_task`, {
     method: "POST",
     body: formData,
   });
+
+  const data = await res.json();
+
+  return data?.id
 }
 
 /**
