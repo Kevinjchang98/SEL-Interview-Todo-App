@@ -2,6 +2,7 @@
 
 import { ChangeEvent, useEffect, useState } from "react";
 import styles from "./TaskDetails.module.css";
+import {useRouter} from "next/navigation";
 
 /**
  * Component to display details about a task. Also allows users to edit the title or description of the task
@@ -14,8 +15,10 @@ export default function TaskDetails(props: { id: string }) {
   const [description, setDescription] = useState("");
   const [newDescription, setNewDescription] = useState("");
   const [newTitle, setNewTitle] = useState("");
+  const router = useRouter()
 
   useEffect(() => {
+    // Retrieve task details again when title or description changes
     const formData = new FormData();
     formData.append("id", props.id);
 
@@ -25,12 +28,15 @@ export default function TaskDetails(props: { id: string }) {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data[0]);
-        const { _id, title, description, _isComplete } = data[0];
-        setTitle(title);
-        setNewTitle(title);
-        setDescription(description);
-        setNewDescription(description);
+        if (data[0] === undefined) {
+          router.push('/')
+        } else {
+          const { _id, title, description, _isComplete } = data[0];
+          setTitle(title);
+          setNewTitle(title);
+          setDescription(description);
+          setNewDescription(description);
+        }
       });
   }, [title, description]);
 
@@ -50,7 +56,6 @@ export default function TaskDetails(props: { id: string }) {
       })
         .then((res) => res.json())
         .then((data) => {
-          console.log(data[0]);
           const { _id, title, description, _isComplete } = data[0];
           setTitle(title);
           setNewTitle(title);
