@@ -17,7 +17,7 @@ async function fetchTaskList() {
 export default async function TaskList() {
   const tasksList: Array<TaskArrayTypes> = await fetchTaskList();
 
-  if (tasksList.length < 2) {
+  if (tasksList.length === 0) {
     return <div><p>No tasks yet. Try creating some!</p></div>
   }
 
