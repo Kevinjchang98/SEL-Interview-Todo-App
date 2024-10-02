@@ -11,15 +11,20 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
+        working-directory: ./sel-todo-app
         with:
           node-version: lts/*
       - name: Install dependencies
+        working-directory: ./sel-todo-app
         run: npm ci
       - name: Install Playwright Browsers
+        working-directory: ./sel-todo-app
         run: npx playwright install --with-deps
       - name: Run Playwright tests
+        working-directory: ./sel-todo-app
         run: npx playwright test
       - uses: actions/upload-artifact@v4
+        working-directory: ./sel-todo-app
         if: ${{ !cancelled() }}
         with:
           name: playwright-report
