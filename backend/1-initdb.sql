@@ -5,7 +5,7 @@ WHERE NOT EXISTS (SELECT FROM pg_database WHERE datname = 'todoapp')\gexec
 CREATE TABLE IF NOT EXISTS tasks
 (
     id          serial PRIMARY KEY,
-    title       varchar(100) NOT NULL,
-    description varchar(1000),
+    title       varchar NOT NULL,
+    description varchar,
     isComplete  boolean
 );
