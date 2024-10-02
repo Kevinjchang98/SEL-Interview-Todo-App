@@ -1,7 +1,7 @@
 import { ChangeEvent, Dispatch, SetStateAction, useState } from "react";
 import styles from "./ActionMenu.module.css";
 import { TaskArrayTypes } from "@/components/TaskCard/TaskCard";
-import { fetchTaskList } from "@/app/page";
+import {fetchTaskList} from "@/app/common-db-utils";
 
 /**
  * API call to backend for creating a new task
@@ -33,7 +33,7 @@ export async function createTask(
 export default function ActionMenu({
   setTasksList,
 }: {
-  setTasksList: Dispatch<SetStateAction<TaskArrayTypes[]>>;
+  setTasksList: Dispatch<SetStateAction<Array<TaskArrayTypes>>>;
 }) {
   const [showCreateForm, setShowCreateForm] = useState(false);
   const [newTaskData, setNewTaskData] = useState({

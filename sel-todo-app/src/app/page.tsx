@@ -1,15 +1,10 @@
 import TaskList from "@/components/TaskList/TaskList";
 import { TaskArrayTypes } from "@/components/TaskCard/TaskCard";
+import {fetchTaskList} from "@/app/common-db-utils";
 
 /**
  * Fetches the list of tasks
  */
-export async function fetchTaskList() {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_DB_HOST}/`, {
-    cache: "no-store",
-  });
-  return res.json();
-}
 
 export default async function Home() {
   const tasksList: Array<TaskArrayTypes> = await fetchTaskList();

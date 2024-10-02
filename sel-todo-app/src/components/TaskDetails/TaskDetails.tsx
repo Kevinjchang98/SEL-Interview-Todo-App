@@ -38,7 +38,7 @@ export default function TaskDetails(props: { id: string }) {
           setNewDescription(description);
         }
       });
-  }, [title, description]);
+  }, [title, description, props.id, router]);
 
   function updateTask() {
     const formData = new FormData();
