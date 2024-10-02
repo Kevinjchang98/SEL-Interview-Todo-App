@@ -1,12 +1,22 @@
 import TaskList from "@/components/TaskList/TaskList";
-import ActionMenu from "@/components/ActionMenu/ActionMenu";
+import { TaskArrayTypes } from "@/components/TaskCard/TaskCard";
 
-export default function Home() {
+/**
+ * Fetches the list of tasks
+ */
+export async function fetchTaskList() {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_DB_HOST}/`, {
+    cache: "no-store",
+  });
+  return res.json();
+}
+
+export default async function Home() {
+  const tasksList: Array<TaskArrayTypes> = await fetchTaskList();
+
   return (
     <>
-      <h1>SEL Todo App</h1>
-      <ActionMenu />
-      <TaskList />
+      <TaskList tasksListInitial={tasksList} />
     </>
   );
 }

@@ -1,7 +1,7 @@
-"use client";
-
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, Dispatch, SetStateAction, useState } from "react";
 import styles from "./ActionMenu.module.css";
+import { TaskArrayTypes } from "@/components/TaskCard/TaskCard";
+import { fetchTaskList } from "@/app/page";
 
 /**
  * API call to backend for creating a new task
@@ -30,7 +30,11 @@ export async function createTask(
  * Menu of actions users may perform on task list
  * @constructor
  */
-export default function ActionMenu() {
+export default function ActionMenu({
+  setTasksList,
+}: {
+  setTasksList: Dispatch<SetStateAction<TaskArrayTypes[]>>;
+}) {
   const [showCreateForm, setShowCreateForm] = useState(false);
   const [newTaskData, setNewTaskData] = useState({
     title: "",
@@ -47,8 +51,15 @@ export default function ActionMenu() {
   const createForm = (
     <form
       className={styles.create_task_form}
-      onSubmit={() => {
-        createTask(newTaskData.title, newTaskData.description);
+      onSubmit={async (event) => {
+        event.preventDefault();
+
+        // POST request to create task in database
+        await createTask(newTaskData.title, newTaskData.description);
+        // Re-fetch task list from database
+        setTasksList(await fetchTaskList());
+        // Clear form to let user add more if desired
+        setNewTaskData({ title: "", description: "" });
       }}
     >
       <label htmlFor="title">Title</label>

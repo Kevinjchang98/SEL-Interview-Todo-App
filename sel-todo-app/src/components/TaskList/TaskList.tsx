@@ -1,31 +1,39 @@
-import TaskCard, {TaskArrayTypes} from "@/components/TaskCard/TaskCard";
+"use client";
 
-/**
- * Fetches the list of tasks
- */
-async function fetchTaskList() {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_DB_HOST}/`, {
-    cache: "no-store",
-  });
-  return res.json();
-}
+import TaskCard, { TaskArrayTypes } from "@/components/TaskCard/TaskCard";
+import ActionMenu from "@/components/ActionMenu/ActionMenu";
+import { useState } from "react";
 
 /**
  * Component to render multiple TaskCard's for each task a user has
  * @constructor
  */
-export default async function TaskList() {
-  const tasksList: Array<TaskArrayTypes> = await fetchTaskList();
+export default function TaskList({
+  tasksListInitial,
+}: {
+  tasksListInitial: Array<TaskArrayTypes>;
+}) {
+  // const tasksList: Array<TaskArrayTypes> = await fetchTaskList();
+  const [tasksList, setTasksList] =
+    useState<Array<TaskArrayTypes>>(tasksListInitial);
 
   if (tasksList.length === 0) {
-    return <div><p>No tasks yet. Try creating some!</p></div>
+    return (
+      <div>
+        <p>No tasks yet. Try creating some!</p>
+      </div>
+    );
   }
 
   return (
-    <div>
-      {tasksList.map((task) => (
-        <TaskCard task={task} key={task[0]}/>
-      ))}
-    </div>
+    <>
+      <h1>SEL Todo App</h1>
+      <ActionMenu setTasksList={setTasksList} />
+      <div>
+        {tasksList.map((task) => (
+          <TaskCard task={task} key={task[0]} />
+        ))}
+      </div>
+    </>
   );
 }
