@@ -13,27 +13,21 @@ export default function TaskList({
 }: {
   tasksListInitial: Array<TaskArrayTypes>;
 }) {
-  // const tasksList: Array<TaskArrayTypes> = await fetchTaskList();
   const [tasksList, setTasksList] =
     useState<Array<TaskArrayTypes>>(tasksListInitial);
 
-  if (tasksList.length === 0) {
-    return (
-      <div>
-        <p>No tasks yet. Try creating some!</p>
-      </div>
+  const tasksListDisplay =
+    tasksList.length === 0 ? (
+      <p>No tasks yet. Try creating some!</p>
+    ) : (
+      tasksList.map((task) => <TaskCard task={task} key={task[0]} />)
     );
-  }
 
   return (
     <>
       <h1>SEL Todo App</h1>
       <ActionMenu setTasksList={setTasksList} />
-      <div>
-        {tasksList.map((task) => (
-          <TaskCard task={task} key={task[0]} />
-        ))}
-      </div>
+      <div>{tasksListDisplay}</div>
     </>
   );
 }
