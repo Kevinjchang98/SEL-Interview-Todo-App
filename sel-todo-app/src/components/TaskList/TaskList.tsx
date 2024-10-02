@@ -16,6 +16,7 @@ export default function TaskList({
   const [tasksList, setTasksList] =
     useState<Array<TaskArrayTypes>>(tasksListInitial);
 
+  // Display "no tasks yet" message if we get an empty list from server
   const tasksListDisplay =
     tasksList.length === 0 ? (
       <p>No tasks yet. Try creating some!</p>

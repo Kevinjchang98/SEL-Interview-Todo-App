@@ -63,6 +63,7 @@ export default function TaskCard(props: TaskCardProps) {
   }
 
   async function handleUndoDelete() {
+    // Note this creates the same task contents but different ID in the backend
     await createTask(title, description, isChecked);
 
     setDeleted(false);

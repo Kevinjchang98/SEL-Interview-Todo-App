@@ -81,9 +81,7 @@ export default function TaskDetails(props: { id: string }) {
     }
   }
 
-  return title === "" ? (
-    <></>
-  ) : (
+  return title === "" ? null : (
     <div className={styles.details_container}>
       <div className={styles.title_edit_container}>
         {/* Title text box if editing*/}
