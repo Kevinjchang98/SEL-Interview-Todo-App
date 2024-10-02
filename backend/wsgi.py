@@ -9,6 +9,25 @@ app = Flask(__name__)
 CORS(app)
 
 
+class get_database_cursor:
+    def __init__(self, commit: bool = False, **kwargs):
+        self.cursor_kwargs = kwargs
+        self.commit = commit
+
+    def __enter__(self):
+        self.conn = get_database_connection()
+        self.cur = self.conn.cursor(**self.cursor_kwargs)
+
+        return self.cur
+
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        if self.commit:
+            self.conn.commit()
+
+        self.cur.close()
+        self.conn.close()
+
+
 def get_database_connection() -> psycopg2.connect:
     conn = psycopg2.connect(
         database="todoapp",
@@ -23,12 +42,9 @@ def get_database_connection() -> psycopg2.connect:
 
 @app.route("/")
 def index():
-    conn = get_database_connection()
-    cur = conn.cursor()
-    cur.execute("SELECT * FROM tasks;")
-    res = cur.fetchall()
-    cur.close()
-    conn.close()
+    with get_database_cursor() as cur:
+        cur.execute("SELECT * FROM tasks;")
+        res = cur.fetchall()
 
     return res
 
@@ -42,12 +58,9 @@ def get_task_overview():
                            "error": f"Malformed request. Received: {request.form.get('id')}"}), 400, {
             'ContentType': 'application/json'}
 
-    conn = get_database_connection()
-    cur = conn.cursor()
-    cur.execute("SELECT id, title, description, isComplete FROM tasks WHERE id = %s;", (id,))
-    res = cur.fetchall()
-    cur.close()
-    conn.close()
+    with get_database_cursor() as cur:
+        cur.execute("SELECT id, title, description, isComplete FROM tasks WHERE id = %s;", (id,))
+        res = cur.fetchall()
 
     return res
 
@@ -62,12 +75,9 @@ def get_task_details():
                            "error": f"Malformed request. Received: {request.form.get('id')}"}), 400, {
             'ContentType': 'application/json'}
 
-    conn = get_database_connection()
-    cur = conn.cursor(cursor_factory=RealDictCursor)  # TODO Refactor other areas to return dict instead
-    cur.execute("SELECT * FROM tasks WHERE id = %s;", (id,))
-    res = cur.fetchall()
-    cur.close()
-    conn.close()
+    with get_database_cursor(cursor_factory=RealDictCursor) as cur:
+        cur.execute("SELECT * FROM tasks WHERE id = %s;", (id,))
+        res = cur.fetchall()
 
     return res
 
@@ -83,12 +93,8 @@ def create_task():
                            "error": f"Malformed request. Received: {request.form.get('title')} {request.form.get('description')}"}), 400, {
             'ContentType': 'application/json'}
 
-    conn = get_database_connection()
-    cur = conn.cursor()
-    cur.execute("INSERT INTO tasks VALUES(DEFAULT, %s, %s, %s);", (title, description, isComplete))
-    conn.commit()
-    cur.close()
-    conn.close()
+    with get_database_cursor(commit=True, cursor_factory=RealDictCursor) as cur:
+        cur.execute("INSERT INTO tasks VALUES(DEFAULT, %s, %s, %s);", (title, description, isComplete))
 
     return json.dumps({'success': True}), 200, {'ContentType': 'application/json'}
 
@@ -104,15 +110,10 @@ def update_task():
                            "error": f"Malformed request. Received: {request.form.get('id')} {request.form.get('title')} {request.form.get('description')}"}), 400, {
             'ContentType': 'application/json'}
 
-    conn = get_database_connection()
-    cur = conn.cursor()
-    cur.execute("UPDATE tasks SET title = %s, description = %s WHERE id = %s", (title, description, id))
-    conn.commit()
-    cur.close()
-    conn.close()
+    with get_database_cursor(commit=True, cursor_factory=RealDictCursor) as cur:
+        cur.execute("UPDATE tasks SET title = %s, description = %s WHERE id = %s", (title, description, id))
 
     return json.dumps({'success': True}), 200, {'ContentType': 'application/json'}
-
 
 
 @app.route("/toggle_complete", methods=["POST"])
@@ -124,12 +125,8 @@ def toggle_complete():
                            "error": f"Malformed request. Received: {request.form.get('id')}"}), 400, {
             'ContentType': 'application/json'}
 
-    conn = get_database_connection()
-    cur = conn.cursor()
-    cur.execute("UPDATE tasks SET isComplete = NOT isComplete WHERE id = %s", (id,))
-    conn.commit()
-    cur.close()
-    conn.close()
+    with get_database_cursor(commit=True, cursor_factory=RealDictCursor) as cur:
+        cur.execute("UPDATE tasks SET isComplete = NOT isComplete WHERE id = %s", (id,))
 
     return json.dumps({'success': True}), 200, {'ContentType': 'application/json'}
 
@@ -141,11 +138,7 @@ def delete_task():
     if not id:
         return json.dumps({'success': False}), 400, {'ContentType': 'application/json'}
 
-    conn = get_database_connection()
-    cur = conn.cursor()
-    cur.execute("DELETE FROM tasks WHERE id = %s;", (id,))
-    conn.commit()
-    cur.close()
-    conn.close()
+    with get_database_cursor(commit=True, cursor_factory=RealDictCursor) as cur:
+        cur.execute("DELETE FROM tasks WHERE id = %s;", (id,))
 
     return json.dumps({'success': True}), 200, {'ContentType': 'application/json'}
