@@ -45,3 +45,6 @@ if this were to be an actual production todo app
    but should be made more generalizable for an actual production system
 6. Define repo linting, formatting rules for frontend and backend
 7. Implement CI/CD pipelines
+8. Fix the currently broken Playwright GitHub Action. It's trying to reach out to the backend at 127.0.0.1:4000, I
+   started just running the deploy script as an easy way to get it up but something's not quite right. If you're
+   reviewing this tomorrow I likely won't have figured it out yet
