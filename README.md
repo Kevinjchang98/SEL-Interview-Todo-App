@@ -1,24 +1,28 @@
 # SEL Interview Todo App
 
-Currently hosted at [http://34.168.81.5/]
+Currently hosted at http://34.168.81.5/
 
-Note that due to DNS propagation delays I wasn't able to get it hosted onto a domain name yet, and thus can't easily get an SSL cert for https. Due to that, Firefox seems to block some http requests to the backend, so currently Chrome's recommended for http communication to work until I can get a domain and https up for the backend.
+Note that due to DNS propagation delays I wasn't able to get it hosted onto a domain name yet, and thus can't easily get
+an SSL cert for https. Google Chrome was the browser primarily used in development, most tested, and recommended to view
+this app
+
+Thanks for your time!
 
 ## Features/functionalities implemented
 
 1. Viewing tasks in a list
 2. Viewing details of a task in a separate page with dynamic per-task route
-2. Adding new tasks
-2. Editing tasks
-3. Marking tasks complete
-4. Deleting tasks
-5. Undoing deletion of tasks (if user hasn't navigated away from page which is interpreted as confirming permanent
+3. Adding new tasks
+4. Editing tasks
+5. Marking tasks complete
+6. Deleting tasks
+7. Undoing deletion of tasks (if user hasn't navigated away from page which is interpreted as confirming permanent
    deletion)
-6. Hosted frontend Next.js node server on Debian VM (Google Cloud instance)
-6. Backend Flask server running on Debian VM (Google Cloud instance)
-7. Backend PostgreSQL database running on Debian VM (Google Cloud instance)
-7. Containerized backend in Docker
-8. Basic deploy script for Debian VM
+8. Hosted frontend Next.js node server on Debian VM (Google Cloud instance)
+9. Backend Flask server running on Debian VM (Google Cloud instance)
+10. Backend PostgreSQL database running on Debian VM (Google Cloud instance)
+11. Containerized backend in Docker
+12. Basic deploy script for Debian VM
 
 ## Features to implement
 
@@ -27,12 +31,11 @@ if this were to be an actual production todo app
 
 1. Error handling and actually parsing responses from Flask API
 2. Domain name with SSL certs to allow for https access and no hacky CORS rules
-3. Linux services to run the node server and docker containers
-4. More detailed unit/integration/regression tests for backend and frontend
-5. Optimistic rendering. The design of the frontend with multiple, constant API requests per action instead of the user
+3. More detailed unit/integration/regression tests for backend and frontend
+4. Optimistic rendering. The design of the frontend with multiple, constant API requests per action instead of the user
    making multiple changes locally, then one API request when they click a confirm button, for example, means laggy
    frontend to backend connections are very apparent
-6. More robust DevOps items. Currently the Docker and deploy scripts were made for my own convenience in prototyping,
+5. More robust DevOps items. Currently the Docker and deploy scripts were made for my own convenience in prototyping,
    but should be made more generalizable for an actual production system
-7. Define repo linting, formatting rules for frontend and backend
-8. Implement CI/CD pipelines
+6. Define repo linting, formatting rules for frontend and backend
+7. Implement CI/CD pipelines
