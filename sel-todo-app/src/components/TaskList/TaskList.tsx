@@ -1,4 +1,4 @@
-import TaskCard, { TaskArrayTypes } from "@/components/TaskCard/TaskCard";
+import TaskCard, {TaskArrayTypes} from "@/components/TaskCard/TaskCard";
 
 /**
  * Fetches the list of tasks
@@ -17,10 +17,14 @@ async function fetchTaskList() {
 export default async function TaskList() {
   const tasksList: Array<TaskArrayTypes> = await fetchTaskList();
 
+  if (tasksList.length < 2) {
+    return <div><p>No tasks yet. Try creating some!</p></div>
+  }
+
   return (
     <div>
       {tasksList.map((task) => (
-        <TaskCard task={task} key={task[0]} />
+        <TaskCard task={task} key={task[0]}/>
       ))}
     </div>
   );
