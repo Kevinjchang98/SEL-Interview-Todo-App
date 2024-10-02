@@ -15,3 +15,4 @@ docker-compose build
 cp ./docker-compose.service /etc/systemd/system/
 
 systemctl enable docker-compose
+systemctl start docker-compose
