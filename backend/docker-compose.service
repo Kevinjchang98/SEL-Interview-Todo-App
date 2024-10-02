@@ -1,7 +1,7 @@
 [Unit]
 Description=Docker containers for Flask and PostgreSQL
-After=Docker.service
-Requires=Docker.service
+After=docker.service
+Requires=docker.service
 
 [Service]
 Type=exec
